@@ -14,20 +14,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get( '/', function () {
-    /*\Illuminate\Support\Facades\Http::post( 'https://api.telegram.org/bot6211485156:AAF-0tUj_Ca79UkjefRbhkFbFJAccCGzU10/sendMessage', [
-        'chat_id' => 1000030645,
-        'text'    => '<i>Hello</i>',
-        'parse_mode'    => 'html',
-    ] );*/
-    /*$telegram = resolve(Telegram::class);
-    $data = [
-        'description' => 'jl;',
-        'file' => 'jl;',
-        'line' => '',
-    ];
-    $telegram->sendMessage(1000030645, (string)view('report', $data));
+Route::get( '/', function (  App\Helpers\Telegram $telegram) {
 
-    echo 1;*/
-    throw new Exception('gjghjkgjhkhjk');
+$buttons = [
+    'inline_keyboard'=> [
+        [
+
+           [
+              'text'  =>'button4',
+              'callback_data'  =>'1',
+           ],
+            [
+                'text'  =>'button9',
+                'callback_data'  =>'2',
+            ],
+
+        ],
+
+        [
+
+
+            [
+                'text'  =>'button3',
+                'callback_data'  =>'3',
+            ],
+
+        ],
+
+    ]
+];
+
+//    $sendMessage=  $telegram->editButtons('1000030645' , 'test7' , json_encode($buttons) , 87);
+
+
+
+//dd( json_decode(  $sendMessage));
+
+//    $sendMessage=  $telegram->sendMessage('1000030645' , 'test');
+//    $sendMessage= json_decode($sendMessage);
+//    $http=  $telegram->sendDocument('1000030645' , '1.jpg' , $sendMessage->result->message_id);
+
 } );

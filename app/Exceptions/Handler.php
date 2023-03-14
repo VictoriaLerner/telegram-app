@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler {
 
     public function report(Throwable $e)
     {
-       ;
+
 
         /** @var Telegram $telegram */
         $telegram = app(Telegram::class);
@@ -61,12 +61,9 @@ class Handler extends ExceptionHandler {
             'file' => $e->getFile(),
             'line' => $e->getLine(),
         ];
-       /* ob_start();
-        var_dump($data);
-        $r = ob_get_clean();
-        info(  $r);*/
+   
 
-        $telegram->sendMessage(1000030645, (string)view('report', $data));
+        $telegram->sendMessage(env('REPORT_TELEGRAM_ID'), (string)view('report', $data));
 
         //$telegram->sendMessage(1000030645,$data, (string)view('report', $data));
       /*  \Illuminate\Support\Facades\Http::post( 'https://api.telegram.org/bot6211485156:AAF-0tUj_Ca79UkjefRbhkFbFJAccCGzU10/sendMessage', [
