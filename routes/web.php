@@ -14,44 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get( '/', function (  App\Helpers\Telegram $telegram) {
-
-$buttons = [
-    'inline_keyboard'=> [
-        [
-
-           [
-              'text'  =>'button4',
-              'callback_data'  =>'1',
-           ],
-            [
-                'text'  =>'button9',
-                'callback_data'  =>'2',
-            ],
-
-        ],
-
-        [
-
-
-            [
-                'text'  =>'button3',
-                'callback_data'  =>'3',
-            ],
-
-        ],
-
-    ]
-];
-
-//    $sendMessage=  $telegram->editButtons('1000030645' , 'test7' , json_encode($buttons) , 87);
-
-
-
-//dd( json_decode(  $sendMessage));
-
-//    $sendMessage=  $telegram->sendMessage('1000030645' , 'test');
-//    $sendMessage= json_decode($sendMessage);
-//    $http=  $telegram->sendDocument('1000030645' , '1.jpg' , $sendMessage->result->message_id);
-
-} );
+Route::get('/', function (\App\Models\Order $order) {
+    return view('site.order', ['orders' => $order->active()->get()]);
+});
+Route::group(['namespace' => 'App\Http\Controllers'], function (){
+    Route::post('/order/store', 'OrderController@store')->name('order.store');
+    Route::post('/webhook', 'WebhookController@index');
+    Route::post('/post/store', 'PostController@store')->name('post.store');
+});
